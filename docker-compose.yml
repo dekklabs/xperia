@@ -6,8 +6,8 @@ services:
     image: postgres:12.17-alpine3.19
     volumes:
       - xperia-vol:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
+    # ports:
+    #   - 5432:5432
     environment:
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -15,16 +15,16 @@ services:
     restart: always
 
   node_server:
-    container_name: ${XPERIA_SERVER_NAME}
     depends_on:
       - dbpostgres
+    container_name: ${XPERIA_SERVER_NAME}
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - .:/app
     ports:
-      - 3005:3000
+      - 3005:3005
 
 volumes:
   xperia-vol:
