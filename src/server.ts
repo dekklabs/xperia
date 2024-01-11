@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cors from 'cors'
 import routes from './routes/index'
 import { AppDataSource } from "./db/connections";
 
@@ -39,6 +40,7 @@ class Server {
 
   middlewares() {
     this.app.use(express.json())
+    this.app.use(cors())
   }
 }
 

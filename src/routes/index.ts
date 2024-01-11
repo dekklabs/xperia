@@ -1,11 +1,8 @@
 import { Router } from 'express'
+import userRouter from './user'
 
 const router = Router()
 
-router.get("/", (_req, res) => {
-  res.json({
-    message: "working"
-  })
-})
+router.use("/api/v1", userRouter)
 
 export default router

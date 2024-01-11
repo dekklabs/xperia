@@ -16,7 +16,9 @@ export class Users extends BaseEntity {
   @Column()
   name: string
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   lastName: string
 
   @Column()
@@ -25,8 +27,13 @@ export class Users extends BaseEntity {
   @Column()
   password: string
 
-  @Column()
+  @Column({
+    nullable: true
+  })
   status: boolean
+
+  @Column()
+  email: string
 
   @CreateDateColumn({
     nullable: false
