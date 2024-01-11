@@ -6,8 +6,8 @@ services:
     image: postgres:12.17-alpine3.19
     volumes:
       - xperia-vol:/var/lib/postgresql/data
-    # ports:
-    #   - 5432:5432
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_USER: ${POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -29,3 +29,7 @@ services:
 volumes:
   xperia-vol:
     external: false
+
+networks:
+  postgres:
+    driver: bridge

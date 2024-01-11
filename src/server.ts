@@ -1,5 +1,6 @@
 import express, { Application } from "express";
 import routes from './routes/index'
+import { AppDataSource } from "./db/connections";
 
 class Server {
   private app: Application
@@ -10,8 +11,8 @@ class Server {
     this.port = process.env.PORT || '3005'
     this.middlewares()
     this.listen()
-    this.connectDB()
     this.routes()
+    this.connectDB()
   }
 
   listen(): void {
@@ -23,9 +24,9 @@ class Server {
   connectDB() {
     const mainDB = async () => {
       try {
-        console.log("connect db")
+        await AppDataSource.initialize()
       } catch(e) {
-      console.error(e)
+        console.error(e)
       }
     }
 
