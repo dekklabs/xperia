@@ -4,11 +4,9 @@ import {
   CreateDateColumn, 
   DeleteDateColumn, 
   Entity, 
-  OneToOne, 
   PrimaryGeneratedColumn, 
   UpdateDateColumn
 } from "typeorm";
-import { UserDetail } from "./UserDetail";
 
 @Entity("Users")
 export class Users extends BaseEntity {
@@ -52,6 +50,6 @@ export class Users extends BaseEntity {
   })
   deleted_at: Date
 
-  @OneToOne(() => UserDetail, userDetail => userDetail.user)
-  userDetail: UserDetail
+  // @OneToOne(() => UserDetail, userDetail => userDetail.user)
+  // userDetail: UserDetail
 }

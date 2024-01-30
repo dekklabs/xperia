@@ -3,9 +3,12 @@ import {
   Column, 
   CreateDateColumn, 
   PrimaryGeneratedColumn, 
-  UpdateDateColumn
+  UpdateDateColumn,
+  Entity,
+  DeleteDateColumn
 } from "typeorm";
 
+@Entity("Tickets")
 export class Tickets extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
@@ -19,15 +22,24 @@ export class Tickets extends BaseEntity {
   @Column()
   userResportId: string
 
-  @Column()
+  @Column({
+    nullable: true,
+    default: "CREATED"
+  })
   status: string
 
-  @Column()
-  idDeleted: boolean
+  @CreateDateColumn({
+    nullable: false
+  })
+  created_at: Date
 
-  @CreateDateColumn()
-  created_at: Date;
+  @UpdateDateColumn({
+    nullable: false
+  })
+  updated_at: Date
 
-  @UpdateDateColumn()
-  updated_at: Date;
+  @DeleteDateColumn({
+    nullable: false
+  })
+  deleted_at: Date
 }

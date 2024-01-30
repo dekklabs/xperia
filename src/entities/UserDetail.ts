@@ -1,5 +1,9 @@
-import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Users } from "./Users";
+import { 
+  BaseEntity, 
+  Column, 
+  Entity, 
+  PrimaryGeneratedColumn
+} from "typeorm";
 
 @Entity("UserDetail")
 export class UserDetail extends BaseEntity {
@@ -9,7 +13,7 @@ export class UserDetail extends BaseEntity {
   @Column()
   photo: string
 
-  @OneToOne(() => Users, user => user.userDetail)
-  @JoinColumn({ name: 'userId' })
-  user: Users
+  // @OneToOne(() => Users, user => user.userDetail)
+  // @JoinColumn({ name: 'userId' })
+  // user: Users
 }
