@@ -2,38 +2,31 @@ import {
   BaseEntity, 
   Column, 
   CreateDateColumn, 
-  DeleteDateColumn, 
-  Entity, 
   PrimaryGeneratedColumn, 
-  UpdateDateColumn
+  UpdateDateColumn,
+  Entity,
+  DeleteDateColumn
 } from "typeorm";
 
-@Entity("Users")
-export class Users extends BaseEntity {
+@Entity("Tickets")
+export class Tickets extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
   @Column()
-  name: string
+  title: string
+
+  @Column()
+  description: string
+
+  @Column()
+  userResportId: string
 
   @Column({
-    nullable: true
+    nullable: true,
+    default: "CREATED"
   })
-  lastName: string
-
-  @Column()
-  username: string
-
-  @Column()
-  password: string
-
-  @Column({
-    nullable: true
-  })
-  status: boolean
-
-  @Column()
-  email: string
+  status: string
 
   @CreateDateColumn({
     nullable: false
@@ -49,7 +42,4 @@ export class Users extends BaseEntity {
     nullable: false
   })
   deleted_at: Date
-
-  // @OneToOne(() => UserDetail, userDetail => userDetail.user)
-  // userDetail: UserDetail
 }
