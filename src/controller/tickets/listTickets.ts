@@ -4,11 +4,17 @@ import { AppDataSource } from "../../db/connections"
 import { Tickets } from "../../entities/Tickets"
 import { responseData } from "../../helpers/responseData"
 
-export const listTickets = async (_: Request, res: Response) => {
+export const listTickets = async (req: Request, res: Response) => {
   try {
+    const page = Number(req.query.page) || 1
+    const limit = Number(req.query.limit) || 10
+    const skip = (page - 1) * limit
     const ticketRepository = AppDataSource.getRepository(Tickets)
 
-    const tickets = await ticketRepository.find()
+    const tickets = await ticketRepository.findAndCount({
+      take: limit,
+      skip
+    })
 
     responseData(res, '', tickets)
   } catch(error) {
