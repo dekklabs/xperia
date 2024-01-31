@@ -10,9 +10,3 @@ Install xperia with yarn
   cd xperia
   yarn install xperia
 ```
-    
-
-## Authors
-
-- [@dekklabs](https://www.github.com/dekklabs)
-
