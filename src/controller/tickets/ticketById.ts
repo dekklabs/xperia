@@ -13,6 +13,6 @@ export const ticketById = async (req: Request, res: Response) => {
     responseData(res, '', ticket)
   } catch(error) {
     console.error(error)
-    errorResponse("errror", res)
+    errorResponse("Error get ticket by id", res)
   }
 }

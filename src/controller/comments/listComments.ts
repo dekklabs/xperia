@@ -5,21 +5,22 @@ import { responseData } from "../../helpers/responseData"
 
 export const listComments = async (req: Request, res: Response) => {
   try {
-    const { userId, ticketId } = req.params
+    const { ticketId } = req.params
 
     const list = await commentsRepository
       .createQueryBuilder('c')
-      .innerJoinAndSelect('c.user', 'u')
       .innerJoinAndSelect('c.ticket', 't')
+      .innerJoinAndSelect('t.user', 'u')
       .select([
         'c.comment',
-        'u.username',
-        't.title',
+        'c.id',
         'c.updated_at',
-        'c.id'
+        'u.username',
+        'u.name',
+        'u.lastName',
+        't.title',
       ])
-      .where('c.userId = :userId', { userId })
-      .andWhere('c.ticketId = :ticketId', { ticketId })
+      .where('c.ticketId = :ticketId', { ticketId })
       .getRawMany()
 
     if (list.length === 0) {
@@ -32,6 +33,8 @@ export const listComments = async (req: Request, res: Response) => {
         comment: item.c_comment,
         username: item.u_username,
         title: item.t_title,
+        name: item.u_name,
+        lastName: item.u_lastName,
         updateAt: item.c_updated_at
       }
     })
