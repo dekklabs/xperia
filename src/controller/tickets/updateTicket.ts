@@ -20,7 +20,7 @@ export const updateTicket = async (req: Request, res: Response) => {
       .where("id = :id", {id})
       .execute()
 
-    responseData(res, "", "")
+    responseData(res, "Ticket updated", "")
   } catch(error) {
     console.error(error)
     errorResponse('error', res)
