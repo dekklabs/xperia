@@ -5,7 +5,7 @@ export const create = async (req: Request, res: Response) => {
   const { 
     title, 
     description, 
-    userResportId
+    userId
   } = req.body
 
   try {
@@ -13,7 +13,7 @@ export const create = async (req: Request, res: Response) => {
 
     ticket.title = title
     ticket.description = description
-    ticket.userResportId = userResportId
+    ticket.userId = userId
 
     await ticket.save()
 
