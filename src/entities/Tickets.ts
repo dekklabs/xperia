@@ -5,8 +5,13 @@ import {
   PrimaryGeneratedColumn, 
   UpdateDateColumn,
   Entity,
-  DeleteDateColumn
+  DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany
 } from "typeorm";
+import { Users } from "./Users";
+import { Comments } from "./Comments";
 
 @Entity("Tickets")
 export class Tickets extends BaseEntity {
@@ -19,8 +24,10 @@ export class Tickets extends BaseEntity {
   @Column()
   description: string
 
-  @Column()
-  userResportId: string
+  @Column({
+    nullable: true,
+  })
+  userId: string
 
   @Column({
     nullable: true,
@@ -42,4 +49,11 @@ export class Tickets extends BaseEntity {
     nullable: false
   })
   deleted_at: Date
+
+  @ManyToOne(() => Users, user => user.tickets)
+  @JoinColumn({ name: 'userId' })
+  user: Users
+
+  @OneToMany(() => Comments, comments => comments.ticket)
+  comments: Comments[]
 }

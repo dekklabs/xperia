@@ -2,8 +2,11 @@ import {
   BaseEntity, 
   Column, 
   Entity, 
+  JoinColumn, 
+  OneToOne, 
   PrimaryGeneratedColumn
 } from "typeorm";
+import { Users } from "./Users";
 
 @Entity("UserDetail")
 export class UserDetail extends BaseEntity {
@@ -13,7 +16,10 @@ export class UserDetail extends BaseEntity {
   @Column()
   photo: string
 
-  // @OneToOne(() => Users, user => user.userDetail)
-  // @JoinColumn({ name: 'userId' })
-  // user: Users
+  @Column()
+  userId: string
+
+  @OneToOne(() => Users, user => user.userdetails)
+  @JoinColumn({ name: "userId" })
+  user: Users
 }

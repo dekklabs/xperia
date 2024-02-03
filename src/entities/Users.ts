@@ -4,9 +4,14 @@ import {
   CreateDateColumn, 
   DeleteDateColumn, 
   Entity, 
+  OneToMany, 
+  OneToOne, 
   PrimaryGeneratedColumn, 
   UpdateDateColumn
 } from "typeorm";
+import { Tickets } from "./Tickets";
+import { Comments } from "./Comments";
+import { UserDetail } from "./UserDetail";
 
 @Entity("Users")
 export class Users extends BaseEntity {
@@ -50,6 +55,12 @@ export class Users extends BaseEntity {
   })
   deleted_at: Date
 
-  // @OneToOne(() => UserDetail, userDetail => userDetail.user)
-  // userDetail: UserDetail
+  @OneToMany(() => Tickets, ticket => ticket.userId)
+  tickets: Tickets[]
+
+  @OneToMany(() => Comments, comments => comments.userId)
+  comments: Comments
+
+  @OneToOne(() => UserDetail, userdetail => userdetail.user)
+  userdetails: UserDetail
 }
