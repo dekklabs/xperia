@@ -18,9 +18,6 @@ export class Comments extends BaseEntity {
   id: string
 
   @Column()
-  description: string
-
-  @Column()
   comment: string
 
   @Column()
