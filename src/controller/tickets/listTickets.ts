@@ -3,6 +3,7 @@ import { errorResponse } from "../../helpers/errorResponse"
 import { AppDataSource } from "../../db/connections"
 import { Tickets } from "../../entities/Tickets"
 import { responseData } from "../../helpers/responseData"
+import { Not } from "typeorm"
 
 export const listTickets = async (req: Request, res: Response) => {
   try {
@@ -13,7 +14,10 @@ export const listTickets = async (req: Request, res: Response) => {
 
     const tickets = await ticketRepository.findAndCount({
       take: limit,
-      skip
+      skip,
+      where: {
+        status: Not("DELETED")
+      }
     })
 
     responseData(res, '', tickets)

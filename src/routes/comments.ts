@@ -6,7 +6,7 @@ import { deleteComment } from '../controller/comments/deleteComment'
 const router = Router()
 
 router.post("/comment/create", createComments)
-router.get("/comments/user/:userId/ticket/:ticketId", listComments)
-router.delete("/comments/delete/:id", deleteComment)
+router.get("/comments/ticket/:ticketId", listComments)
+router.delete("/comment/delete/:id", deleteComment)
 
 export default router

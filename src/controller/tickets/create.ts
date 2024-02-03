@@ -21,8 +21,7 @@ export const create = async (req: Request, res: Response) => {
       message: "ticket created"
     })
   } catch(error) {
-    console.error(error)
-    responseError("Internal Server", res)
+    responseError("Error create ticket", res)
   }
 }
 
