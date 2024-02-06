@@ -3,6 +3,7 @@ import { Users } from "../../entities/Users"
 import { encryptPassword } from "../../helpers/helpers"
 import userExists from "../../helpers/validateUserExists"
 import { generateToken } from "../../helpers/generateToken"
+import { responseData } from "../../helpers/responseData"
 
 export const register = async (req: Request, res: Response) => {
   const { 
@@ -11,6 +12,7 @@ export const register = async (req: Request, res: Response) => {
     password,
     email,
   } = req.body
+  console.log(req.body)
 
   try {
     const hashedPassword: string = await encryptPassword(password)
@@ -34,12 +36,7 @@ export const register = async (req: Request, res: Response) => {
 
     const token = generateToken(user);
 
-    return res
-      .status(201)
-      .json({
-        message: `User ${name} was created suscess`,
-        token
-      })
+    responseData(res, `User ${name} was created suscess`, token)
   } catch(e) {
     console.error(e)
   }
