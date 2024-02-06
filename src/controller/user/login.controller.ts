@@ -3,6 +3,7 @@ import { Users } from "../../entities/Users";
 import { AppDataSource } from "../../db/connections";
 import { comparePassword } from "../../helpers/comparePassword";
 import { generateToken } from "../../helpers/generateToken";
+import { responseData } from "../../helpers/responseData";
 
 export const login = async (req: Request, res: Response) => {
   const { username, password } = req.body
@@ -24,7 +25,7 @@ export const login = async (req: Request, res: Response) => {
 
     const token = generateToken(user);
 
-    return res.json({ token })
+    responseData(res, "success", token)
   } catch(error) {
     console.error(error)
 
