@@ -10,6 +10,10 @@ export const updateTicket = async (req: Request, res: Response) => {
     const { id } = req.params
     const { title, description } = req.body
 
+    if (id.length === 0) {
+      errorResponse('id es necesario', res)
+    }
+
     ticket.title = title
     ticket.description = description
 

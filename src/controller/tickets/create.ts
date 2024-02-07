@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Tickets } from "../../entities/Tickets";
+import { validateRequestFields } from "../../helpers/validateRequestFields";
 
 export const create = async (req: Request, res: Response) => {
   const { 
@@ -7,6 +8,12 @@ export const create = async (req: Request, res: Response) => {
     description, 
     userId
   } = req.body
+
+  const validateBody = validateRequestFields([title, description, userId], req)
+
+  if (!validateBody) {
+    responseError("Todos los campos son necesarios", res)
+  }
 
   try {
     const ticket = new Tickets()

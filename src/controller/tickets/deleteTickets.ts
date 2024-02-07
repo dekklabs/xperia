@@ -9,6 +9,10 @@ export const deleteTickets = async (req: Request, res: Response) => {
     const ticket = new Tickets()
     const { id } = req.params
 
+    if (id.length === 0) {
+      errorResponse('id es necesario', res)
+    }
+
     ticket.status = "DELETED"
 
     await ticketRepository

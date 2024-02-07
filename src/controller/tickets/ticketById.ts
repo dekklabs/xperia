@@ -8,6 +8,10 @@ export const ticketById = async (req: Request, res: Response) => {
 
     const { id } = req.params
 
+    if (id.length === 0) {
+      errorResponse('id es necesario', res)
+    }
+
     const ticket = await ticketRepository.findOne({ where: { id } })
 
     responseData(res, '', ticket)
