@@ -4,3 +4,5 @@ run:
 down:
 	docker-compose down
 
+up:
+#qwe
