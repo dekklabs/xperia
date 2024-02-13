@@ -15,13 +15,13 @@ export const authentication = (
   res: Response,
   next: NextFunction
 ) => {
-  const header = req.headers.authentication
+  const header = req.headers['authorization']
 
   if (!header) {
     return messageUnauthorized(res)
   }
 
-  const token = header.split(" ")[1]
+  const token = header && header.split(" ")[1]
   if (!token) {
     return messageUnauthorized(res)
   }
